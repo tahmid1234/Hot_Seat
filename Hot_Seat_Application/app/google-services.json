@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "925113055296",
+    "project_id": "hotseat-d98f0",
+    "storage_bucket": "hotseat-d98f0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:925113055296:android:31b959ae42fed2f58747a5",
+        "android_client_info": {
+          "package_name": "com.example.hot_sear"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "925113055296-b82k4uh7rfj8i3qd4ghf92ua8v8i882p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hot_sear",
+            "certificate_hash": "770c96482dc90cff563d0c50e3f7f718f9e1d75a"
+          }
+        },
+        {
+          "client_id": "925113055296-0k4put7e5g19ro1sg2d3kpclc92povib.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBC1PUjS8v91LyL4wN1zcRbJ4v3c9HvSB4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "925113055296-0k4put7e5g19ro1sg2d3kpclc92povib.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

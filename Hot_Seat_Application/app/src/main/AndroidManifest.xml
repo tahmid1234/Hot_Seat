@@ -10,7 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Hot_Sear">
         <activity
-            android:name=".MainActivity"
+            android:name=".Activity.HomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.GoogleSignInActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.SignInActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
