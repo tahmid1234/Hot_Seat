@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.hot_sear.R;
-import com.example.hot_sear.Repositories.LocalStoreRepository;
+import com.example.hot_sear.Repositories.LocalStoreUserinfoRepository;
 import com.example.hot_sear.Utility.GlobalInfo;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -34,7 +34,7 @@ public class SignInActivity extends AppCompatActivity {
     private FirebaseUser mUser;
     private SignInButton signInButton;
     private SharedPreferences userInfo;
-    private LocalStoreRepository localStoreRepository;
+    private LocalStoreUserinfoRepository localStoreUserinfoRepository;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

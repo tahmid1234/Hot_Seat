@@ -9,8 +9,8 @@ import com.google.firebase.database.ValueEventListener;
 public class FirebaseRepository {
     private String userName;
 
-    private DatabaseReference myRef = GlobalInfo.Database.getReference(GlobalInfo.User_Auth_Id);
-    public void getUserNameFromFirebase(){
+    private DatabaseReference myRef; //= GlobalInfo.Database.getReference(GlobalInfo.User_Auth_Id);
+    /*public void getUserNameFromFirebase(){
         // Read from the database
         //myRef.child(GlobalInfo.User_Name_Node).setValue("Hello, World!");
         myRef.child(GlobalInfo.User_Name_Node).addValueEventListener(new ValueEventListener() {
@@ -32,5 +32,9 @@ public class FirebaseRepository {
             }
         });
 
+    }*/
+
+    public void storeUsername(String userName){
+        GlobalInfo.Firebase_Databse.getReference(GlobalInfo.User_Auth_Id).child(GlobalInfo.User_Name_Node).setValue(userName);
     }
 }

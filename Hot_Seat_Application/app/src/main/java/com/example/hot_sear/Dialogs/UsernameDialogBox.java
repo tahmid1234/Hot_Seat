@@ -14,6 +14,8 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.fragment.app.DialogFragment;
 
 
+import com.example.hot_sear.Function.IUsername;
+import com.example.hot_sear.Function.UsernameFunction;
 import com.example.hot_sear.R;
 import com.example.hot_sear.Utility.GlobalInfo;
 
@@ -22,6 +24,7 @@ public class UsernameDialogBox extends DialogFragment {
     private EditText editTextUsername;
     private String username;
     private View view;
+    private IUsername usernameFunction;
 
 
 
@@ -45,6 +48,9 @@ public class UsernameDialogBox extends DialogFragment {
 
                         GlobalInfo.User_Username = username;
 
+
+                        usernameFunction = new UsernameFunction();
+                        usernameFunction.storeUsername(username);
                     // sign in the user ...
                     }
                 });

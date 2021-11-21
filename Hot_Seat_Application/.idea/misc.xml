@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/hot_seat_as/Hot_Seat/Hot_Seat_Application/app/src/main/res/drawable/circular_button.xml" value="0.11" />
         <entry key="..\:/hot_seat_as/Hot_Seat/Hot_Seat_Application/app/src/main/res/layout/activity_google_sign_in.xml" value="0.12" />
+        <entry key="..\:/hot_seat_as/Hot_Seat/Hot_Seat_Application/app/src/main/res/layout/activity_home.xml" value="0.22" />
         <entry key="..\:/hot_seat_as/Hot_Seat/Hot_Seat_Application/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/hot_seat_as/Hot_Seat/Hot_Seat_Application/app/src/main/res/layout/dialogbox_username.xml" value="0.25" />
       </map>

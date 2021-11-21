@@ -1,24 +1,31 @@
 package com.example.hot_sear.Repositories;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.SharedPreferences;
 
 import com.example.hot_sear.Utility.GlobalInfo;
 
-public class LocalStoreRepository {
+public class LocalStoreUserinfoRepository {
     SharedPreferences userInfo;
     private String userName;
     private FirebaseRepository firebaseRepository;
-    public LocalStoreRepository(SharedPreferences userInfo){
-       this.userInfo = userInfo;
-       firebaseRepository = new FirebaseRepository();
+    public LocalStoreUserinfoRepository(){
+       userInfo = GlobalInfo.User_Info;
+
     }
     public boolean getUserName(){
        userName = userInfo.getString(GlobalInfo.User_Auth_Id,GlobalInfo.Invalid_Info);
-       if(!userName.equals(GlobalInfo.Invalid_Info)) {
+        System.out.println(userName+" sharedpref");
+       if(!userName.equals("Invalid")) {
            GlobalInfo.User_Username = userName;
            return true;
        }
-       firebaseRepository.getUserNameFromFirebase();
+
        return false;
+    }
+
+    public void storedata(String username){
+        userInfo.edit().putString(GlobalInfo.User_Auth_Id,username).apply();
     }
 }
