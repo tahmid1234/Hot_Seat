@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Hot_Sear</string>
     <string name="username">username1234</string>
+    <string name="occupied_warning">This seat has been occupied by</string>
 </resources>

@@ -12,7 +12,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.hot_sear.Dialogs.UsernameDialogBox;
+import com.example.hot_sear.Dialogs.WarningDialogBox;
 import com.example.hot_sear.Function.IUsername;
+import com.example.hot_sear.Function.OccupiedChairHelper;
 import com.example.hot_sear.Function.UsernameFunction;
 import com.example.hot_sear.Models.OccupiedChair;
 import com.example.hot_sear.R;
@@ -28,11 +30,13 @@ public class HomeActivity extends AppCompatActivity {
     private LocalStoreUserinfoRepository localStoreUserinfoRepository;
     private DatabaseReference myRef = GlobalInfo.Firebase_Databse.getReference(GlobalInfo.User_Auth_Id);
     private UsernameDialogBox usernameDialogBox;
+    private WarningDialogBox warningDialogBox;
     private IUsername usernameFunction;
     private ImageButton[] chairs;
     private TextView[] x_btn;
     private TextView[] takenBy;
     private OccupiedChair[] occupiedChairs;
+    private OccupiedChairHelper occupiedChairHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,12 +54,16 @@ public class HomeActivity extends AppCompatActivity {
         takenBy[0] = findViewById(R.id.occupied1);
         takenBy[1] = findViewById(R.id.occupied2);
         takenBy[2] = findViewById(R.id.occupied3);
+        occupiedChairHelper = new OccupiedChairHelper();
+        initializeOccupiedCHairs(occupiedChairs);
         disableBtn(chairs);
         System.out.println("Heloooooooo"+GlobalInfo.User_Auth_Id);
         getUserName();
+        getChairStatus();
         Toast.makeText(this, GlobalInfo.User_Username+" global user name", Toast.LENGTH_SHORT).show();
         usernameDialogBox = new UsernameDialogBox();
         occupyChair();
+        disableCrossBtn();
 
 
     }
@@ -109,25 +117,37 @@ public class HomeActivity extends AppCompatActivity {
             chairs[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    System.out.println("Kire ki khobor valo?"+j);
+                    if(occupiedChairs[j].getChairColor().equals(GlobalInfo.Occupied_Chair_Color)){
+                        warningDialogBox = new WarningDialogBox(occupiedChairs[j].getTakenBy());
+                        warningDialogBox.show(getSupportFragmentManager(),"Warning");
+                    }
+                    else{
+                        occupiedChairHelper.makeChairOccupied(GlobalInfo.User_Username,GlobalInfo.Occupied_Chair_Color,j);
+                        enableCrossBtn(j);
+
+                    }
+
                 }
             });
         }
     }
 
     private void getChairStatus(){
-        myRef.child(GlobalInfo.Chair_Node).addValueEventListener(new ValueEventListener() {
+        System.out.println("Dhukse ni");
+        GlobalInfo.Firebase_Databse.getReference().child(GlobalInfo.Chair_Node).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                System.out.println("for er upor"+ snapshot);
                 for(DataSnapshot ds : snapshot.getChildren()){
+                    System.out.println(ds+" dekhi ki ashe");
                     occupiedChairs[Integer.parseInt(ds.getKey())] = ds.getValue(OccupiedChair.class);
                     if(occupiedChairs[Integer.parseInt(ds.getKey())].getChairColor().equals(GlobalInfo.Occupied_Chair_Color))
                     {
-                        GlobalInfo.Chair_Taken[Integer.parseInt(ds.getKey())] = 1;
+                        GlobalInfo.Chair_Taken[Integer.parseInt(ds.getKey())] = R.drawable.circular_red_button;
                         updateChairState(occupiedChairs[Integer.parseInt(ds.getKey())],Integer.parseInt(ds.getKey()));
                     }
                     else {
-                        GlobalInfo.Chair_Taken[Integer.parseInt(ds.getKey())] = 0;
+                        GlobalInfo.Chair_Taken[Integer.parseInt(ds.getKey())] = R.drawable.circular_button;
                         updateChairState(occupiedChairs[Integer.parseInt(ds.getKey())],Integer.parseInt(ds.getKey()));
                     }
 
@@ -153,7 +173,29 @@ public class HomeActivity extends AppCompatActivity {
     }
     private void updateChairState(OccupiedChair occupiedChair,int i){
         takenBy[i].setText(occupiedChair.getTakenBy());
-        chairs[i].setBackgroundColor(Color.parseColor(occupiedChair.getChairColor()));
+        System.out.println(occupiedChair.getChairColor()+" color");
+        chairs[i].setBackground(getDrawable(GlobalInfo.Chair_Taken[i]));
 
+
+    }
+
+    private void disableCrossBtn(){
+        for(TextView x: x_btn){
+            x.setEnabled(false);
+            x.setVisibility(View.GONE);
+        }
+    }
+    private void enableCrossBtn(int i){
+
+            x_btn[i].setEnabled(true);
+            x_btn[i].setVisibility(View.VISIBLE);
+
+    }
+
+    private void initializeOccupiedCHairs(OccupiedChair occupiedChairs[]){
+        for(int i =0;i<GlobalInfo.Max_Chairs;i++){
+            occupiedChairs[i] = new OccupiedChair();
+        }
+        System.out.println("Occupied "+occupiedChairs[2].getChairColor()+" color ");
     }
 }

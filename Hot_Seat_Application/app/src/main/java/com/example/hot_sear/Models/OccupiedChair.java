@@ -1,8 +1,11 @@
 package com.example.hot_sear.Models;
 
 public class OccupiedChair {
-    private String takenBy;
-    private String chairColor;
+    private String takenBy="";
+    private String chairColor="j";
+
+    public OccupiedChair() {
+    }
 
     public String getTakenBy() {
         return takenBy;
