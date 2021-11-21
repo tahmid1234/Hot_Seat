@@ -4,12 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.hot_sear.Activity.GoogleSignInActivity;
 import com.example.hot_sear.R;
+import com.example.hot_sear.Repositories.LocalStoreRepository;
+import com.example.hot_sear.Utility.GlobalInfo;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -31,7 +33,8 @@ public class SignInActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseUser mUser;
     private SignInButton signInButton;
-
+    private SharedPreferences userInfo;
+    private LocalStoreRepository localStoreRepository;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,6 +114,8 @@ public class SignInActivity extends AppCompatActivity {
 
     private void updateUI(FirebaseUser user) {
         if(user!=null){
+
+            GlobalInfo.User_Auth_Id = user.getUid();
             startActivity(new Intent(getApplicationContext(), HomeActivity.class));
             finish();
         }
