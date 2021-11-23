@@ -35,7 +35,7 @@ public class WarningDialogBox extends DialogFragment {
         // Pass null as the parent view because its going in the dialog layout
         view = inflater.inflate(R.layout.warning_dialogbox, null);
         text_tv = view.findViewById(R.id.warning);
-        text_tv.setText(R.string.occupied_warning+taken_by);
+        text_tv.setText(getString(R.string.occupied_warning)+taken_by);
         builder.setView(view)
                 // Add action buttons
                 .setPositiveButton("Done", new DialogInterface.OnClickListener() {

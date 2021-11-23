@@ -22,6 +22,9 @@ public class GlobalInfo {
     public static final String Chair_Node = "Chairs";
     //shared preference
     public static final String User_Info_Sp = "UserInfo";
+    public static  SharedPreferences Chair_State_Sp ;
+    public  static final String Chair_State = "ChairState";
+
 
     //invalid info
     public  static final String Invalid_Info = "Invalid";

@@ -5,9 +5,9 @@
     <!-- you can use any color you want I used here gray color-->
     <solid android:color="@color/round_btn_clr"/>
     <size
-        android:width="100dp"
-        android:height="100dp"/>
+        android:width="80dp"
+        android:height="80dp"/>
 
-    <corners android:radius="200dp"/>
+    <corners android:radius="160dp"/>
     <stroke android:color="@color/border" android:width="3dp"/>
 </shape>

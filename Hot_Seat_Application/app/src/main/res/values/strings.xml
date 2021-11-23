@@ -1,5 +1,8 @@
 <resources>
-    <string name="app_name">Hot_Sear</string>
+    <string name="app_name">Hot Seat</string>
     <string name="username">username1234</string>
     <string name="occupied_warning">This seat has been occupied by</string>
+    <string name="chair_1">Seat 1</string>
+    <string name="chair_2">Seat 2</string>
+    <string name="chair_3">Seat 3</string>
 </resources>

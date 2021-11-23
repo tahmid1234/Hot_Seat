@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg">
+
+    <ImageButton
+        android:id="@+id/chair1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="42dp"
+        android:layout_marginEnd="290dp"
+        android:layout_marginBottom="329dp"
+        android:background="@drawable/circular_button"
+        android:contentDescription="chair1"
+        android:foregroundGravity="center"
+        android:src="@drawable/ic_baseline_airline_seat_recline_normal_24"
+        tools:srcCompat="@drawable/ic_baseline_airline_seat_recline_normal_24" />
+
+    <ImageButton
+        android:id="@+id/chair2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="166dp"
+        android:layout_marginTop="322dp"
+        android:layout_marginEnd="165dp"
+        android:layout_marginBottom="329dp"
+        android:background="@drawable/circular_button"
+        android:contentDescription="chair2"
+        android:foregroundGravity="center"
+        app:srcCompat="@drawable/ic_baseline_airline_seat_recline_normal_24" />
+
+    <ImageButton
+        android:id="@+id/chair3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="41dp"
+        android:layout_marginBottom="330dp"
+        android:background="@drawable/circular_button"
+        android:contentDescription="chair1"
+        android:foregroundGravity="center"
+        app:srcCompat="@drawable/ic_baseline_airline_seat_recline_normal_24" />
+
+    <TextView
+        android:id="@+id/occupied1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="297dp"
+        android:layout_marginBottom="290dp"
+        android:gravity="center"
+        android:text="TextView"
+        android:textColor="@color/cross" />
+
+    <TextView
+        android:id="@+id/occupied2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="178dp"
+        android:layout_marginBottom="290dp"
+        android:gravity="center"
+        android:text="TextView"
+        android:textColor="@color/cross" />
+
+    <TextView
+        android:id="@+id/occupied3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="55dp"
+        android:layout_marginBottom="291dp"
+        android:gravity="center"
+        android:text="TextView"
+        android:textColor="@color/cross" />
+
+    <TextView
+        android:id="@+id/x1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="251dp"
+        android:layout_marginBottom="397dp"
+        android:text="X"
+        android:textColor="@color/cross"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/x2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="123dp"
+        android:layout_marginBottom="394dp"
+        android:text="X"
+        android:textColor="@color/cross"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/x3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="391dp"
+        android:text="X"
+        android:textColor="@color/cross"
+        android:textSize="20sp" />
+
+    <ImageButton
+        android:id="@+id/signout"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="193dp"
+        android:layout_marginBottom="89dp"
+        android:background="@color/bg"
+        android:contentDescription="signout"
+        android:foregroundGravity="center"
+        android:minWidth="48dp"
+        app:srcCompat="@drawable/ic_baseline_sensor_door_24" />
+</RelativeLayout>

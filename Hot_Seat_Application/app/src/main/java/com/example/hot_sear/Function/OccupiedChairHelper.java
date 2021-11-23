@@ -11,8 +11,9 @@ public class OccupiedChairHelper {
         firebaseChairDataRepository = new FirebaseChairDataRepository();
     }
 
-    public void makeChairOccupied(String username, String color,int i){
+    public OccupiedChair makeChairOccupied(String username, String color,int i){
         occupiedChair = new OccupiedChair(username,color);
         firebaseChairDataRepository.storeChairState(occupiedChair,i);
+        return occupiedChair;
     }
 }

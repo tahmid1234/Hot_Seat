@@ -5,9 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity.HomeActivity"
-    android:orientation="horizontal"
+    android:orientation="vertical"
+    android:background="@color/bg"
+
 
     >
+
+    <ImageButton
+        android:id="@+id/signout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:contentDescription="signout"
+        android:background="@color/bg"
+        android:minHeight="48dp"
+        android:src="@drawable/ic_baseline_sensor_door_24" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_gravity="center">
 
 
 
@@ -15,32 +34,40 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginLeft="30dp"
+        >
         <TextView
             android:id="@+id/x1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="X"
             android:textSize="20dp"
-            android:layout_gravity="right"/>
+            android:layout_gravity="right"
+            android:textColor="@color/cross"/>
+
         <ImageButton
             android:id="@+id/chair1"
-            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:background="@drawable/circular_button"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="10dp"
+
+
+            android:background="@drawable/circular_button"
             android:contentDescription="Chair 1"
-            android:textAlignment="center"/>
+
+
+            android:src="@drawable/ic_baseline_airline_seat_recline_normal_24"
+            android:textAlignment="center" />
         <TextView
             android:id="@+id/occupied1"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:text="Chair1"
+            android:textColor="@color/cross"
             android:layout_gravity="center"
-            android:layout_marginLeft="30dp"
+
             android:layout_margin="20dp"
-            android:textSize="20dp"
+            android:textSize="12dp"
 
 
             />
@@ -49,6 +76,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_margin="55dp"
         android:orientation="vertical">
         <TextView
             android:id="@+id/x2"
@@ -56,25 +84,29 @@
             android:layout_height="wrap_content"
             android:text="X"
             android:textSize="20dp"
-            android:layout_gravity="right"/>
+            android:layout_gravity="right"
+            android:textColor="@color/cross"/>
+
         <ImageButton
             android:id="@+id/chair2"
-            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:background="@drawable/circular_button"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="10dp"
+
+            android:background="@drawable/circular_button"
             android:contentDescription="Chair 1"
-            android:textAlignment="center"/>
+
+            android:src="@drawable/ic_baseline_airline_seat_recline_normal_24"
+            android:textAlignment="center" />
         <TextView
             android:id="@+id/occupied2"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:text="Chair1"
+            android:textColor="@color/cross"
             android:layout_gravity="center"
             android:layout_marginLeft="30dp"
             android:layout_margin="20dp"
-            android:textSize="20dp"
+            android:textSize="12dp"
 
 
             />
@@ -83,40 +115,48 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        >
         <TextView
             android:id="@+id/x3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="X"
             android:textSize="20dp"
-            android:layout_gravity="right"/>
-    <ImageButton
-        android:id="@+id/chair3"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:background="@drawable/circular_button"
+            android:layout_gravity="right"
+            android:textColor="@color/cross"/>
 
-        android:layout_gravity="center"
-        android:layout_margin="10dp"
-        android:contentDescription="Chair 1"
-        android:textAlignment="center"/>
+        <ImageButton
+            android:id="@+id/chair3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+
+
+            android:background="@drawable/circular_button"
+            android:contentDescription="Chair 1"
+
+            android:src="@drawable/ic_baseline_airline_seat_recline_normal_24"
+            android:textAlignment="center" />
     <TextView
         android:id="@+id/occupied3"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:text="Chair1"
+        android:textColor="@color/cross"
         android:layout_gravity="center"
         android:layout_marginLeft="30dp"
         android:layout_margin="20dp"
-        android:textSize="20dp"
+        android:textSize="12dp"
 
 
         />
+
+
     </LinearLayout>
 
 
 
+    </LinearLayout>
 
 
 

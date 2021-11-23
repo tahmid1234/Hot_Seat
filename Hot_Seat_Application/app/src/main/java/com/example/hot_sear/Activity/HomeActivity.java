@@ -1,10 +1,13 @@
 package com.example.hot_sear.Activity;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -18,8 +21,10 @@ import com.example.hot_sear.Function.OccupiedChairHelper;
 import com.example.hot_sear.Function.UsernameFunction;
 import com.example.hot_sear.Models.OccupiedChair;
 import com.example.hot_sear.R;
+import com.example.hot_sear.Repositories.ChairStateLocalData;
 import com.example.hot_sear.Repositories.LocalStoreUserinfoRepository;
 import com.example.hot_sear.Utility.GlobalInfo;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -37,10 +42,14 @@ public class HomeActivity extends AppCompatActivity {
     private TextView[] takenBy;
     private OccupiedChair[] occupiedChairs;
     private OccupiedChairHelper occupiedChairHelper;
+    private ImageButton signout_btn;
+
+    ChairStateLocalData chairStateLocalData;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.home_draft);
+
         chairs = new ImageButton[3];
         x_btn = new TextView[GlobalInfo.Max_Chairs];
         takenBy = new TextView[GlobalInfo.Max_Chairs];
@@ -54,22 +63,39 @@ public class HomeActivity extends AppCompatActivity {
         takenBy[0] = findViewById(R.id.occupied1);
         takenBy[1] = findViewById(R.id.occupied2);
         takenBy[2] = findViewById(R.id.occupied3);
+        signout_btn = findViewById(R.id.signout);
         occupiedChairHelper = new OccupiedChairHelper();
+        chairStateLocalData = new ChairStateLocalData();
         initializeOccupiedCHairs(occupiedChairs);
         disableBtn(chairs);
         System.out.println("Heloooooooo"+GlobalInfo.User_Auth_Id);
         getUserName();
         getChairStatus();
-        Toast.makeText(this, GlobalInfo.User_Username+" global user name", Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this, GlobalInfo.User_Username+" global user name", Toast.LENGTH_SHORT).show();
         usernameDialogBox = new UsernameDialogBox();
         occupyChair();
         disableCrossBtn();
+        if(chairStateLocalData.getChairState()!=-1) {
+            enableCrossBtn(chairStateLocalData.getChairState());
+            disableBtn(chairs);
+        }
+        leaveChair();
+
+        signout_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(getApplicationContext(), SignInActivity.class));
+                finish();
+            }
+        });
 
 
     }
 
     public void getUserName(){
         GlobalInfo.User_Info = getSharedPreferences(GlobalInfo.User_Auth_Id,MODE_PRIVATE);
+        GlobalInfo.Chair_State_Sp = getSharedPreferences(GlobalInfo.Chair_State,MODE_PRIVATE);
         //localStoreUserinfoRepository = new LocalStoreUserinfoRepository(userInfo);
         usernameFunction = new UsernameFunction();
 
@@ -90,8 +116,8 @@ public class HomeActivity extends AppCompatActivity {
                 // whenever data at this location is updated.
                 if(dataSnapshot.exists()) {
                     GlobalInfo.User_Username = dataSnapshot.getValue(String.class);
-                    System.out.println("Global Useroooo Name" + GlobalInfo.User_Username);
-                    System.out.println(dataSnapshot + " Datasnapshot");
+                    //System.out.println("Global Useroooo Name" + GlobalInfo.User_Username);
+                    //System.out.println(dataSnapshot + " Datasnapshot");
                     //Log.d(TAG, "Value is: " + value);
                     usernameFunction.storeUsername(GlobalInfo.User_Username );
                 }
@@ -99,11 +125,15 @@ public class HomeActivity extends AppCompatActivity {
                     usernameDialogBox.show(getSupportFragmentManager(),"Username");
                 }
                 enableBtn(chairs);
+                if(chairStateLocalData.getChairState()!=-1) {
+                    enableCrossBtn(chairStateLocalData.getChairState());
+                    disableBtn(chairs);
+                }
             }
 
             @Override
             public void onCancelled(DatabaseError error) {
-                System.out.println("error "+error);
+                //System.out.println("error "+error);
                 // Failed to read value
                 //Log.w(TAG, "Failed to read value.", error.toException());
             }
@@ -124,6 +154,8 @@ public class HomeActivity extends AppCompatActivity {
                     else{
                         occupiedChairHelper.makeChairOccupied(GlobalInfo.User_Username,GlobalInfo.Occupied_Chair_Color,j);
                         enableCrossBtn(j);
+                        chairStateLocalData.storeChairSTate(j);
+                        disableBtn(chairs);
 
                     }
 
@@ -132,8 +164,25 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
+    private void leaveChair(){
+        for(int i =0;i<GlobalInfo.Max_Chairs;i++){
+            final int j= i;
+            x_btn[i].setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View view) {
+                    updateChairState(occupiedChairHelper.makeChairOccupied("",GlobalInfo.Free_Chair_Color,j),j);
+                    disableCrossBtn();
+                    chairStateLocalData.storeChairSTate(-1);
+                    getChairStatus();
+                    enableBtn(chairs);
+                }
+            });
+        }
+    }
+
     private void getChairStatus(){
-        System.out.println("Dhukse ni");
+      //  System.out.println("Dhukse ni");
         GlobalInfo.Firebase_Databse.getReference().child(GlobalInfo.Chair_Node).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -145,10 +194,16 @@ public class HomeActivity extends AppCompatActivity {
                     {
                         GlobalInfo.Chair_Taken[Integer.parseInt(ds.getKey())] = R.drawable.circular_red_button;
                         updateChairState(occupiedChairs[Integer.parseInt(ds.getKey())],Integer.parseInt(ds.getKey()));
+
+
                     }
                     else {
                         GlobalInfo.Chair_Taken[Integer.parseInt(ds.getKey())] = R.drawable.circular_button;
                         updateChairState(occupiedChairs[Integer.parseInt(ds.getKey())],Integer.parseInt(ds.getKey()));
+                        enableSingleBtn(Integer.parseInt(ds.getKey()));
+                    }
+                    if(chairStateLocalData.getChairState()!=-1) {
+                        disableBtn(chairs);
                     }
 
                 }
@@ -164,6 +219,11 @@ public class HomeActivity extends AppCompatActivity {
     private void enableBtn(ImageButton[] chairs){
         for(ImageButton chair:chairs)
             chair.setEnabled(true);
+        System.out.println("emables");
+    }
+    private void enableSingleBtn(int i){
+
+            chairs[i].setEnabled(true);
         System.out.println("emables");
     }
     private void disableBtn(ImageButton[] chairs){
@@ -182,13 +242,16 @@ public class HomeActivity extends AppCompatActivity {
     private void disableCrossBtn(){
         for(TextView x: x_btn){
             x.setEnabled(false);
-            x.setVisibility(View.GONE);
+            x.setVisibility(View.INVISIBLE);
+            System.out.println("Disbale");
         }
+
     }
     private void enableCrossBtn(int i){
 
             x_btn[i].setEnabled(true);
             x_btn[i].setVisibility(View.VISIBLE);
+        System.out.println(i+" xbtnnnnnnnnn");
 
     }
 

@@ -76,10 +76,10 @@ public class SignInActivity extends AppCompatActivity {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 //Log.d(TAG, "firebaseAuthWithGoogle:" + account.getId());
                 firebaseAuthWithGoogle(account.getIdToken());
-                Toast.makeText(this, "successful", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(this, "successful", Toast.LENGTH_SHORT).show();
             } catch (ApiException e) {
 
-                Toast.makeText(this, "ki holo"+e, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "ki holo"+e, Toast.LENGTH_SHORT).show();
                 // Google Sign In failed, update UI appropriately
                 //Log.w(TAG, "Google sign in failed", e);
             }
@@ -97,14 +97,14 @@ public class SignInActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             //Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Toast.makeText(SignInActivity.this, "successful 222", Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(SignInActivity.this, "successful 222", Toast.LENGTH_SHORT).show();
                             updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
                             //Log.w(TAG, "signInWithCredential:failure", task.getException());
 
                             updateUI(null);
-                            Toast.makeText(SignInActivity.this, "nujhi e na"+task.getException(), Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(SignInActivity.this, "nujhi e na"+task.getException(), Toast.LENGTH_SHORT).show();
 
                         }
                     }
